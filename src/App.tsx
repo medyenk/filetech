@@ -1,46 +1,28 @@
-import React, { useState } from "react";
-import axios from "axios";
+import { useEffect, useRef } from "react";
 import "./App.css";
 
-const API_URL = import.meta.env.VITE_API_URL;
-const API_KEY = import.meta.env.VITE_API_KEY;
-
 function App() {
-  const [email, setEmail] = useState("");
-  const [message, setMessage] = useState("");
+  const myRef = useRef<HTMLDivElement>(null);
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
+  useEffect(() => {
+    const script = document.createElement("script");
 
-    try {
-      const response = await axios.post(
-        API_URL,
-        {
-          email: email,
-          listIds: 3,
-        },
-        {
-          headers: {
-            "api-key": API_KEY,
-            "Content-Type": "application/json",
-          },
-        }
-      );
+    script.src =
+      "https://eocampaign1.com/form/19ffff10-9b9f-11ef-bd02-e37b215b3002.js";
+    script.async = true;
+    script.setAttribute("data-form", "19ffff10-9b9f-11ef-bd02-e37b215b3002");
 
-      if (response.status === 201) {
-        setMessage("Thank you for subscribing!");
-        setEmail("");
-      } else {
-        setMessage("Something went wrong. Please try again.");
-      }
-    } catch (error) {
-      if (axios.isAxiosError(error) && error.response) {
-        setMessage(error.response.data.message);
-      } else {
-        setMessage("An unexpected error occurred.");
-      }
+    const myRefNode = myRef.current;
+    if (myRefNode) {
+      myRefNode.appendChild(script);
     }
-  };
+
+    return () => {
+      if (myRefNode) {
+        myRefNode.removeChild(script);
+      }
+    };
+  }, []);
 
   return (
     <div className="App">
@@ -52,22 +34,9 @@ function App() {
           </div>
         </header>
         <main className="main-content">
-          <h2>Subscribe to get updates.</h2>
-          <div className="subscribe-form">
-            <form onSubmit={handleSubmit} className="form-inline">
-              <input
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                placeholder="Enter your email"
-                required
-                className="email-input"
-              />
-              <button type="submit" className="subscribe-button">
-                Subscribe
-              </button>
-            </form>
-            {message && <p className="form-message">{message}</p>}
+          <div className="main-container">
+            <h3>Subscribe to our mailing list!</h3>
+            <div ref={myRef}></div>
           </div>
         </main>
       </div>
