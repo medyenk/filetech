@@ -26,20 +26,18 @@ function App() {
 
   return (
     <div className="App">
-      <div className="content">
-        <header className="header">
-          <div className="header-content">
-            <img src="/filetech.png" alt="Logo" className="logo" />
-            <h1 className="header-text">Empowering Legal Efficiency</h1>
-          </div>
-        </header>
-        <main className="main-content">
-          <div className="main-container">
-            <h3>Subscribe to our mailing list!</h3>
-            <div ref={myRef}></div>
-          </div>
-        </main>
-      </div>
+      <header className="header">
+        <div className="header-content">
+          <img src="/filetech.png" alt="Logo" className="logo" />
+          <h1 className="header-text">Empowering Legal Efficiency</h1>
+        </div>
+      </header>
+      <main className="main-content">
+        <div className="main-container">
+          <h3>Subscribe to our mailing list!</h3>
+          <div ref={myRef}></div>
+        </div>
+      </main>
       <footer className="footer">
         <p>&copy; 2024 FileTech. All rights reserved.</p>
       </footer>
