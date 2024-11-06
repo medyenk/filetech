@@ -34,7 +34,6 @@ function App() {
       </header>
       <main className="main-content">
         <div className="main-container">
-          <h3>Subscribe to our mailing list!</h3>
           <div ref={myRef}></div>
         </div>
       </main>
